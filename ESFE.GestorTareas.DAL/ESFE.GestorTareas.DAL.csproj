@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <Folder Include="DataContext\" />
+    <Folder Include="DATABASE\" />
   </ItemGroup>
 
   <ItemGroup>
