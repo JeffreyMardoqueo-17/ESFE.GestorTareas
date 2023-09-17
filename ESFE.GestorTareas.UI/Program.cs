@@ -1,7 +1,13 @@
+using Microsoft.EntityFrameworkCore;
+using ESFE.GestorTareas.DAL.DataContext;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<GestorTareasBdContext>(opciones =>{
+    opciones.UseSqlServer(builder.Configuration.GetConnectionString("MiConexionBD"));
+});
 
 var app = builder.Build();
 
