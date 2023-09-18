@@ -42,7 +42,7 @@ CREATE TABLE Usuario(
 Id INT NOT NULL PRIMARY KEY IDENTITY (1,1),
 Nombre VARCHAR (25) NOT NULL,
 Correo VARCHAR (50) NOT NULL,
-Contraseña VARCHAR (50) NOT NULL,
+Contraseï¿½a VARCHAR (50) NOT NULL,
 IdEmpleado INT NOT NULL FOREIGN KEY REFERENCES Empleado(Id)
 )
 GO
@@ -69,3 +69,51 @@ IdTarea BIGINT NOT NULL FOREIGN KEY REFERENCES Tarea(Id),
 IdUsuario INT NOT NULL FOREIGN KEY REFERENCES Usuario(Id),
 IdEmpleado INT NOT NULL FOREIGN KEY REFERENCES Empleado(Id),
 )
+CREATE TABLE Usuario(
+Id INT NOT NULL PRIMARY KEY IDENTITY (1,1),
+Nombre VARCHAR (25) NOT NULL,
+Correo VARCHAR (50) NOT NULL,
+Contraseï¿½a VARCHAR (50) NOT NULL,
+IdEmpleado INT NOT NULL FOREIGN KEY REFERENCES Empleado(Id)
+)
+GO
+SELECT * FROM Usuario
+
+----------------------PROCEDIMIENTOS ALMACENADOS-----
+---REGISTRO DE USUARIO
+CREATE PROCEDURE SPRegistroUsuario(
+    @Nombre VARCHAR (25),
+    @Correo VARCHAR (50),
+    @Contra VARCHAR (50),
+    @Registrado BIT OUTPUT,
+    @MESS VARCHAR(100) OUTPUT
+)
+AS
+BEGIN
+IF(NOT EXISTS(SELECT * FROM Usuario WHERE Correo = @Correo)) ---primero verfica q el correo no este registrado
+BEGIN 
+    ---si no estaregistrado pasa a esto
+    INSERT INTO Usuario(Correo, Contra) VALUES(@Correo,@Contra)
+        SET @Registrado = 1
+        SET @MESS = 'Usuario registrado'
+    END
+    ---si ya est registrado hace esto
+    ELSE
+    BEGIN
+        SET @Registrado = 0
+        SET @MESS = 'Correo ya existente'
+    END
+END
+---VALIDAR USUARIO
+CREATE PROC SPValidarUsuario(
+    @Correo VARCHAR(50),
+    @Contra VARCHAR(50)
+    AS
+    BEGIN
+        IF(EXISTS (SELECT * FROM Usuario WHERE Correo = @Correo AND Contra = @Contra))
+            SELECT IdUsuario FROM Usuario WHERE Correo = @Correo AND Contra = @Contra 
+        ELSE
+            SELECT '0'
+        END 
+)
+
