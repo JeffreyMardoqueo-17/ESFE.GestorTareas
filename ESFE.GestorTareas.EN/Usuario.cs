@@ -12,8 +12,8 @@ public partial class Usuario
 
     public string Correo { get; set; } = null!;
 
-    public string Contraseña { get; set; } = null!;
-
+    public string Contrasenia { get; set; } = null!;
+    public string ConfirmarContrasenia { get; set; } = null!;
     public int IdEmpleado { get; set; }
 
     public virtual ICollection<AsignacionTarea> AsignacionTareas { get; set; } = new List<AsignacionTarea>();
