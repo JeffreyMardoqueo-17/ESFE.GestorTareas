@@ -1,5 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using ESFE.GestorTareas.DAL.DataContext;
+using ESFE.GestorTareas.DAL.Repositories;
+using ESFE.GestorTareas.EN;
+using ESFE.GestorTareas.BL.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +11,9 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<GestorTareasBdContext>(opciones =>{
     opciones.UseSqlServer(builder.Configuration.GetConnectionString("MiConexionBD"));
 });
+
+builder.Services.AddScoped<IGenericRepository<Categorium>, CategoriumRepository>();
+builder.Services.AddScoped<ICategoriaService, CategoriaService>();
 
 var app = builder.Build();
 

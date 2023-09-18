@@ -1,4 +1,7 @@
-﻿using ESFE.GestorTareas.UI.Models;
+﻿using ESFE.GestorTareas.BL.Service;
+using ESFE.GestorTareas.EN;
+using ESFE.GestorTareas.UI.Models;
+using ESFE.GestorTareas.UI.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -6,17 +9,69 @@ namespace ESFE.GestorTareas.UI.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ICategoriaService _categoriaService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ICategoriaService CateServ)
         {
-            _logger = logger;
+            _categoriaService = CateServ;
         }
 
         public IActionResult Index()
         {
             return View();
         }
+
+        [HttpGet]
+        public async Task <IActionResult> Lista()
+        {
+
+            IQueryable<Categorium> queryCategoriumSQL = await _categoriaService.ObtenerTodos();
+
+            List<VMCategoria> lista = queryCategoriumSQL
+                                      .Select(c=> new VMCategoria()
+                                      {
+                                        Id = c.Id,
+                                        Nombre = c.Nombre
+                                      }).ToList();
+            return StatusCode(StatusCodes.Status200OK, lista);            
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Insertar([FromBody] VMCategoria modelo)
+        {
+
+            Categorium NuevoModelo = new Categorium()
+            {
+                Nombre = modelo.Nombre
+            };
+            bool respuesta = await _categoriaService.Insertar(NuevoModelo);
+
+            return StatusCode(StatusCodes.Status200OK,new { valor = respuesta});
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Actualizar([FromBody] VMCategoria modelo)
+        {
+
+            Categorium NuevoModelo = new Categorium()
+            {
+                Id = modelo.Id,
+                Nombre = modelo.Nombre
+            };
+            bool respuesta = await _categoriaService.Actualizar(NuevoModelo);
+
+            return StatusCode(StatusCodes.Status200OK, new { valor = respuesta });
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> Eliminar(int id)
+        {
+     
+            bool respuesta = await _categoriaService.Eliminar(id);
+
+            return StatusCode(StatusCodes.Status200OK, new { valor = respuesta });
+        }
+
 
         public IActionResult Privacy()
         {

@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace ESFE.GestorTareas.BL.Service
 {
-    internal interface IUsuarioService
+    public interface IUsuarioService
     {
+
     }
 }
