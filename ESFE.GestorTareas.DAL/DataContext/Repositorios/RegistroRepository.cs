@@ -11,6 +11,12 @@ namespace ESFE.GestorTareas.DAL.DataContext.Repositorios
     public class RegistroRepository : IGenericRepository<Usuario>
     {
         private readonly GestorTareasBdContext _dbContext;
+
+        public RegistroRepository(GestorTareasBdContext context) //este es el contructor (ctor)
+        {
+            _dbContext = context;
+        }
+
         public Task<bool> Actualizar(Usuario modelo)
         {
             throw new NotImplementedException();

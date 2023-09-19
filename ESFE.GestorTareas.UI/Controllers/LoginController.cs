@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ESFE.GestorTareas.EN;
+using ESFE.GestorTareas.DAL.DataContext;
 
 namespace ESFE.GestorTareas.UI.Controllers
 {
@@ -17,5 +18,11 @@ namespace ESFE.GestorTareas.UI.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public ActionResult Registrar(Usuario usuarioG)
+        {
+            return View();
+        }
+
     }
 }

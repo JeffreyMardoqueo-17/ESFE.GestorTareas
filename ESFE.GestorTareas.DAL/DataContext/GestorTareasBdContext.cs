@@ -170,7 +170,9 @@ public partial class GestorTareasBdContext : DbContext
 
             entity.ToTable("Usuario");
 
-            entity.Property(e => e.Contraseña)
+
+
+            entity.Property(e => e.Contrasenia)
                 .HasMaxLength(50)
                 .IsUnicode(false);
             entity.Property(e => e.Correo)
