@@ -10,14 +10,14 @@
 
 <div class="container mx-4">
     <div class="row justify-content-center">
-        <div class=" col-12">
+        <div class=" col-12 d-flex">
             <div class="card shadow">
                 <div class="card-header bg-success text-white text-center">
                     <h2 class="card-title" style="margin-right: 85px; margin-top: 20px;">Lista de categorias</h2>
                 </div>
                 <div class="card-body">
                     <div class="text-center mb-3">
-                        <button class="btn btn-primary" id="btnNuevo"> <i class="bi bi-film"></i> Añadir categoria</button>
+                        <button class="btn btn-primary" id="btnNuevo"> <i class="bi bi-folder-plus mx-2"></i> Añadir categoria</button>
                     </div>
                     <table class="table table-bordered table-striped" id="tbCategoria">
                         <thead>
@@ -165,7 +165,7 @@
                             $("<tr>").append(
                                 $("<td>").text(item.nombre),
                                 $("<td>").append(
-                                    $("<button>").addClass("btn btn-warning btn-sm btn-editar").data("modelo", item).html('<i class="fas fa-edit"></i> Editar'),
+                                    $("<button>").addClass("btn btn-warning mx-2 btn-sm btn-editar").data("modelo", item).html('<i class="fas fa-edit"></i> Editar'),
                                     $("<button>").addClass("btn btn-danger btn-sm btn-eliminar").data("id", item.id).html('<i class="fas fa-trash"></i> Eliminar')
                                 )
 
