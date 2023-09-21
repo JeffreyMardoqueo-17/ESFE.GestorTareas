@@ -30,15 +30,15 @@ namespace ESFE.GestorTareas.BL.Service
             return await _prioRepo.Insertar(modelo);
         }
 
-        public Task<Prioridad> Obtener(int id)
+        public async Task<Prioridad> Obtener(int id)
         {
-            throw new NotImplementedException();
+            return await _prioRepo.Obtener(id);
         }
 
         public async Task<Prioridad> ObtenerPorNombre(string nombrePrioridad)
         {
             IQueryable<Prioridad> queryPrioridadSQL = await _prioRepo.ObtenerTodos();
-            Prioridad prioridad = queryPrioridadSQL.Where(c => c.Nombre == nombrePrioridad).FirstOrDefault();
+            Prioridad? prioridad = queryPrioridadSQL.FirstOrDefault(c => c.Nombre == nombrePrioridad);
             return prioridad;
         }
 

@@ -31,15 +31,15 @@ namespace ESFE.GestorTareas.BL.Service
             return await _cateRepo.Insertar(modelo);
         }
 
-        public Task<Categorium> Obtener(int id)
+        public async Task<Categorium> Obtener(int id)
         {
-            throw new NotImplementedException();
+            return await _cateRepo.Obtener(id);
         }
 
         public async Task<Categorium> ObtenerPorNombre(string nombreCategorium)
         {
             IQueryable<Categorium> queryCategoriumSQL = await _cateRepo.ObtenerTodos();
-            Categorium categorium = queryCategoriumSQL.Where(c => c.Nombre == nombreCategorium).FirstOrDefault();
+            Categorium? categorium = queryCategoriumSQL.FirstOrDefault(c => c.Nombre == nombreCategorium);
             return categorium;
         }
 
