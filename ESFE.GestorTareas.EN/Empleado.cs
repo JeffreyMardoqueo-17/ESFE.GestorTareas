@@ -27,8 +27,7 @@ public partial class Empleado
 
     public virtual ICollection<AsignacionTarea> AsignacionTareas { get; set; } = new List<AsignacionTarea>();
 
-    [ForeignKey("IdCargo")]
-    public virtual Cargo Cargo { get; set; } = null!;
+    public virtual Cargo IdCargoNavigation { get; set; } = null!;
 
     public virtual ICollection<Usuario> Usuarios { get; set; } = new List<Usuario>();
 }
