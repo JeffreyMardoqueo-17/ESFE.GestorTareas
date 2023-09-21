@@ -25,12 +25,9 @@ public partial class AsignacionTarea
     [Required]
     public int IdEmpleado { get; set; }
 
-    [ForeignKey("IdEmpleado")]
-    public virtual Empleado Empleado { get; set; } = null!;
+    public virtual Empleado IdEmpleadoNavigation { get; set; } = null!;
 
-    [ForeignKey("IdTarea")]
-    public virtual Tarea Tarea { get; set; } = null!;
+    public virtual Tarea IdTareaNavigation { get; set; } = null!;
 
-    [ForeignKey("IdUsuario")]
-    public virtual Usuario Usuario { get; set; } = null!;
+    public virtual Usuario IdUsuarioNavigation { get; set; } = null!;
 }

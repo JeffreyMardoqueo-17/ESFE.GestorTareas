@@ -136,18 +136,18 @@ public partial class GestorTareasBdContext : DbContext
             entity.ToTable("Tarea");
 
             entity.Property(e => e.Descripcion).IsUnicode(false);
-            entity.Property(e => e.Estado)
-                .HasMaxLength(20)
-                .IsUnicode(false);
+            //entity.Property(e => e.Estado)
+                //.HasMaxLength(20)
+                //.IsUnicode(false);
             entity.Property(e => e.FechaVencimiento).HasColumnType("datetime");
             entity.Property(e => e.Nombre)
                 .HasMaxLength(50)
                 .IsUnicode(false);
-            entity.Property(e => e.Prioridad)
-                .HasMaxLength(20)
-                .IsUnicode(false);
+            //entity.Property(e => e.Prioridad)
+                //.HasMaxLength(20)
+              //  .IsUnicode(false);
 
-            entity.HasOne(d => d.IdCategoriaNavigation).WithMany(p => p.Tareas)
+            entity.HasOne(d => d.IdCategoriumNavigation).WithMany(p => p.Tareas)
                 .HasForeignKey(d => d.IdCategoria)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__Tarea__IdCategor__31EC6D26");
