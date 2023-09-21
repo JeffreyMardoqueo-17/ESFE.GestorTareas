@@ -1,8 +1,7 @@
-﻿using ESFE.GestorTareas.EN;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
-namespace ESFE.GestorTareas.DAL.DataContext;
+namespace ESFE.GestorTareas.EN;
 
 public partial class Usuario
 {
@@ -12,7 +11,7 @@ public partial class Usuario
 
     public string Correo { get; set; } = null!;
 
-    public string Contraseña { get; set; } = null!;
+    public string Pass { get; set; } = null!;
 
     public int IdEmpleado { get; set; }
 

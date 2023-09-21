@@ -1,8 +1,7 @@
-﻿using ESFE.GestorTareas.EN;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
-namespace ESFE.GestorTareas.DAL.DataContext;
+namespace ESFE.GestorTareas.EN;
 
 public partial class Tarea
 {

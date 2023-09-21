@@ -16,3 +16,15 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+
+/* Estilos para reducir el tamaño del contenedor de categorías */
+#tbCategoria {
+    max-width: 400px; /* Define el ancho máximo del contenedor */
+    max-height: 200px; /* Define la altura máxima del contenedor */
+    overflow: auto; /* Agrega una barra de desplazamiento si el contenido es más grande que el contenedor */
+}
+
+
+
+
