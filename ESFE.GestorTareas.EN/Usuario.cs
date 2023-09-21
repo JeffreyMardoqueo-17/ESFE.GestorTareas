@@ -28,5 +28,5 @@ public partial class Usuario
     public virtual ICollection<AsignacionTarea> AsignacionTareas { get; set; } = new List<AsignacionTarea>();
 
     //RELACION ENTRE LLAVE FORANEA CON EL MODELO 
-    public virtual Empleado idEmpleadoNavigation { get; set; } = null!;
+    public virtual Empleado IdEmpleadoNavigation { get; set; } = null!;
 }

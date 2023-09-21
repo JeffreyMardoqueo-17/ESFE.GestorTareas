@@ -26,7 +26,8 @@ public partial class AsignacionTarea
     public int IdEmpleado { get; set; }
 
     public virtual Empleado IdEmpleadoNavigation { get; set; } = null!;
-    public virtual Tarea IdTareaNaviagtion { get; set; } = null!;
+
+    public virtual Tarea IdTareaNavigation { get; set; } = null!;
 
     public virtual Usuario IdUsuarioNavigation { get; set; } = null!;
 }

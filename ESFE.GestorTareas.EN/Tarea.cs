@@ -33,12 +33,9 @@ public partial class Tarea
 
     public virtual ICollection<AsignacionTarea> AsignacionTareas { get; set; } = new List<AsignacionTarea>();
 
-    [ForeignKey("IdCategoria")]
-    public virtual Categorium Categorium { get; set; } = null!;
+    public virtual Categorium IdCategoriumNavigation { get; set; } = null!;
 
-    [ForeignKey("IdEstadoTarea")]
-    public virtual EstadoTarea EstadoTarea { get; set; } = null!;
+    public virtual EstadoTarea IdEstadoTareaNavigation { get; set; } = null!;
 
-    [ForeignKey("IdPrioridad")]
-    public virtual Prioridad Prioridad { get; set; } = null!;
+    public virtual Prioridad IdPrioridadNavigation { get; set; } = null!;
 }
