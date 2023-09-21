@@ -30,15 +30,16 @@ namespace ESFE.GestorTareas.BL.Service
             return await _empleRepo.Insertar(modelo);
         }
 
-        public Task<Empleado> Obtener(int id)
+        public async Task<Empleado> Obtener(int id)
         {
-            throw new NotImplementedException();
+            return await _empleRepo.Obtener(id);
         }
 
         public async Task<Empleado> ObtenerPorNombre(string nombreEmpleado)
         {
             IQueryable<Empleado> queryEmpleadoSQL = await _empleRepo.ObtenerTodos();
-            Empleado empleado = queryEmpleadoSQL.Where(c => c.Nombre == nombreEmpleado).FirstOrDefault();
+            Empleado? empleado = queryEmpleadoSQL.FirstOrDefault(c => c.Nombre == nombreEmpleado);
+
             return empleado;
         }
 
