@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<GestorTareasBdContext>(opciones =>{
-    opciones.UseSqlServer(builder.Configuration.GetConnectionString("MiConexionBD"));
+    opciones.UseSqlServer(builder.Configuration.GetConnectionString("CadenSQL"));
 });
 
 builder.Services.AddScoped<IGenericRepository<Categorium>, CategoriumRepository>();
