@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.16" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ESFE.GestorTareas.BL\ESFE.GestorTareas.BL.csproj" />
     <ProjectReference Include="..\ESFE.GestorTareas.EN\ESFE.GestorTareas.EN.csproj" />
   </ItemGroup>

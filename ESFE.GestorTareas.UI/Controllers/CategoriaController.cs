@@ -4,7 +4,7 @@ namespace ESFE.GestorTareas.UI.Controllers
 {
     public class CategoriaController : Controller
     {
-        public IActionResult Index()
+        public IActionResult ViewCategoria()
         {
             return View();
         }

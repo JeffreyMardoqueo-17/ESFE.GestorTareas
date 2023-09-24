@@ -1,6 +1,21 @@
 ﻿@{
     ViewData["Title"] = "Login";
 }
-
-<h1>Login</h1>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="/ESFE.GestorTareas.UI/wwwroot/js/Login.js"></script>
+<div class="mb-3 row">
+    <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
+    <div class="col-sm-10">
+        <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="email@example.com">
+    </div>
+</div>
+<div class="mb-3 row">
+    <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+    <div class="col-sm-10">
+        <input type="password" class="form-control" id="inputPassword">
+    </div>
+    <button class="btn btn-primary" id="btnNuevo"> <i class="bi bi-folder-plus mx-2"></i> Iniciar</button>
+</div>
 

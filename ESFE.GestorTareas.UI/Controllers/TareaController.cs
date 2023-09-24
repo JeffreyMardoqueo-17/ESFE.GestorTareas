@@ -4,7 +4,7 @@ namespace ESFE.GestorTareas.UI.Controllers
 {
     public class TareaController : Controller
     {
-        public IActionResult Index()
+        public IActionResult ViewTarea()
         {
             return View();
         }

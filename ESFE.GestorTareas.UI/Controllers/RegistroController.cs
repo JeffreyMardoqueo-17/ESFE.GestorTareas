@@ -1,5 +1,6 @@
 ﻿using ESFE.GestorTareas.BL.Service;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace ESFE.GestorTareas.UI.Controllers
 {
@@ -12,6 +13,12 @@ namespace ESFE.GestorTareas.UI.Controllers
         //{
         //    //_categoriaService = CateServ;
         //}
+        private readonly IRegisteredServices _registroService;
+
+        public RegistroController(IRegisteredServices regSer)
+        {
+            _registroService = regSer;
+        }
 
         public IActionResult ViewUsuario()
         {
