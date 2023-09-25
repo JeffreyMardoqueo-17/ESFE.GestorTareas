@@ -115,5 +115,5 @@ CREATE PROC SPValidarUsuario(
         ELSE
             SELECT '0'
         END 
-)
+);
 

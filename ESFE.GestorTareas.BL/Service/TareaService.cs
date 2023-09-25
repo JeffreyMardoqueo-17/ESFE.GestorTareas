@@ -41,7 +41,7 @@ namespace ESFE.GestorTareas.BL.Service
             Tarea? tarea = queryTareaSQL.FirstOrDefault(c => c.Nombre == nombreTarea);
             return tarea;
         }
-
+        
         public async Task<IQueryable<Tarea>> ObtenerTodos()
         {
             return await _tareRepo.ObtenerTodos();
