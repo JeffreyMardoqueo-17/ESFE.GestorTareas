@@ -9,11 +9,14 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<GestorTareasBdContext>(opciones =>{
-    opciones.UseSqlServer(builder.Configuration.GetConnectionString("CadenSQL"));
+    opciones.UseSqlServer(builder.Configuration.GetConnectionString("MiConexionBD"));
 });
 
 builder.Services.AddScoped<IGenericRepository<Categorium>, CategoriumRepository>();
 builder.Services.AddScoped<ICategoriaService, CategoriaService>();
+builder.Services.AddScoped<IGenericRepository<Usuario>, UsuarioRepository>();
+builder.Services.AddScoped<IUsuarioService, UsuarioService>();
+
 
 var app = builder.Build();
 
@@ -30,6 +33,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=RegistroUsuario}/{action=Registro}/{id?}");
+    pattern: "{controller=Acceso}/{action=Registro}/{id?}");
 
 app.Run();

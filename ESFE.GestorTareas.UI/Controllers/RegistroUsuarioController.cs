@@ -6,7 +6,7 @@ namespace ESFE.GestorTareas.UI.Controllers
     {
         public IActionResult ViewRegistroUsuario()
         {
-            return View();
+            return View("RegistroUsuario/Registro");
         }
     }
 }

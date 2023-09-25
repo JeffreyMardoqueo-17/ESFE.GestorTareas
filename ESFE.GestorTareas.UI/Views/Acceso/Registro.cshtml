@@ -1,7 +1,144 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Registro";
 }
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 
-<h1>Registro</h1>
+<div class="container mx-4">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <div class="card shadow">
+                <div class="card-header bg-success text-white text-center">
+                    <h2 class="card-title" style="margin-right: auto; margin-top: 20px;">Iniciar Sesión</h2>
+                </div>
+                <div class="card-body">
+                    <!-- Botón para abrir el modal de registro -->
+                    <div class="text-center mb-3">
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#registroModal">
+                            <i class="bi bi-person-plus mx-2"></i> Registrarse
+                        </button>
+                    </div>
+                    <hr>
+                    <!-- Agrega aquí el formulario de inicio de sesión si lo deseas -->
+                    <form id="loginForm">
+                        <div class="mb-3">
+                            <label for="nombreUsuario" class="form-label">Nombre de Usuario</label>
+                            <input type="text" class="form-control" id="nombreUsuario" name="nombreUsuario" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="correo" class="form-label">Correo Electrónico</label>
+                            <input type="email" class="form-control" id="correo" name="correo" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="contrasena" class="form-label">Contraseña</label>
+                            <input type="password" class="form-control" id="contrasena" name="contrasena" required>
+                        </div>
+                        <div class="text-center mb-3">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-person-check mx-2"></i> Iniciar Sesión
+                            </button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de Registro -->
+<div class="modal fade" id="registroModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal'lg'">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title text-center" id="exampleModalLabel">Registrarse</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Formulario de Registro -->
+                <form id="registroForm">
+                    <div class="mb-3">
+                        <label for="nombreRegistro" class="form-label">Nombre de Usuario</label>
+                        <input type="text" class="form-control" id="nombreRegistro" name="nombreRegistro" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="correoRegistro" class="form-label">Correo Electrónico</label>
+                        <input type="email" class="form-control" id="correoRegistro" name="correoRegistro" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="contrasenaRegistro" class="form-label">Contraseña</label>
+                        <input type="password" class="form-control" id="contrasenaRegistro" name="contrasenaRegistro" required>
+                    </div>
+                    <div class="text-center mb-3">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-person-plus mx-2"></i> Registrarse
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal'lg'">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white ">
+                <h5 class="modal-title">Detalle categorias</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="txtId" value="0" />
+                <div class="mb-3">
+                    <label for="txtNombre" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="txtNombre" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btnGuardar"> <i class="bi bi-save"></i> Guardar</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal"> <i class="bi bi-x-circle"></i> Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script>
+        // Función para manejar el envío del formulario de inicio de sesión
+        document.getElementById("loginForm").addEventListener("submit", function (event) {
+            event.preventDefault(); // Evita que el formulario se envíe de forma predeterminada
+
+            const nombreUsuario = document.getElementById("nombreUsuario").value;
+            const correo = document.getElementById("correo").value;
+            const contrasena = document.getElementById("contrasena").value;
+
+            // Aquí puedes realizar la solicitud HTTP POST al servidor para iniciar sesión
+            fetch("/Acceso/Registro", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    nombreUsuario: nombreUsuario,
+                    correo: correo,
+                    contrasena: contrasena
+                })
+            })
+                .then(response => {
+                    if (response.ok) {
+                        // Inicio de sesión exitoso, redirigir al usuario a la página de inicio
+                        window.location.href = "/Home/Index";
+                    } else {
+                        // Mostrar un mensaje de error al usuario
+                        alert("Inicio de sesión fallido. Verifique sus credenciales.");
+                    }
+                })
+                .catch(error => {
+                    console.error("Error al iniciar sesión:", error);
+                });
+        });
+    </script>
+}
 
