@@ -16,7 +16,9 @@ builder.Services.AddScoped<IGenericRepository<Categorium>, CategoriumRepository>
 builder.Services.AddScoped<ICategoriaService, CategoriaService>();
 builder.Services.AddScoped<IGenericRepository<Usuario>, UsuarioRepository>();
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
-
+//tarea
+builder.Services.AddScoped<IGenericRepository<Tarea>, TareaRepository>();
+builder.Services.AddScoped<ITareaService, TareaService>();
 
 var app = builder.Build();
 
@@ -33,6 +35,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Acceso}/{action=Registro}/{id?}");
+    pattern: "{controller=Tarea}/{action=Tarea}/{id?}");
 
 app.Run();
