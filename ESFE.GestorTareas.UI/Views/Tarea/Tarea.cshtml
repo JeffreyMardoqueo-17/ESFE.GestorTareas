@@ -4,3 +4,61 @@
 @{
     ViewData["Title"] = "Tarea Page";
 }
+
+<div class="container mx-4">
+    <div class="row justify-content-center">
+        <div class=" col-12 d-flex">
+            <div class="card shadow">
+                <div class="card-header bg-success text-white text-center">
+                    <h2 class="card-title" style="margin-right: 85px; margin-top: 20px;">Lista de categorias</h2>
+                </div>
+                <div class="card-body">
+                    <div class="text-center mb-3">
+                        <button class="btn btn-primary" id="btnNuevo"> <i class="bi bi-folder-plus mx-2"></i> Añadir categoria</button>
+                    </div>
+                    <table class="table table-bordered table-striped" id="tbCategoria">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal'lg'">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white  ">
+                <h5 class="modal-title">Detalle categorias</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="txtId" value="0" />
+                <div class="mb-3">
+                    <label for="lblNombre" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="txtNombre" />
+                    <label for="lblDescripcion" class="form-label">Descripcion</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1"></textarea>
+                    <label for="lblFecha" class="form-label">Fecha</label>
+                    <input type="date" class="form-control" id="txtNombre" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btnGuardar"> <i class="bi bi-save"></i> Guardar</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal"> <i class="bi bi-x-circle"></i> Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="./js/Tarea.js"></script>
+}
+
+                 
