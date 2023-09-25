@@ -121,15 +121,15 @@
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    nombreUsuario: nombreUsuario,
-                    correo: correo,
-                    contrasena: contrasena
+                    Nombre: nombreUsuario,
+                    Correo: correo,
+                    Pass: contrasena
                 })
             })
                 .then(response => {
                     if (response.ok) {
                         // Inicio de sesión exitoso, redirigir al usuario a la página de inicio
-                        window.location.href = "/Home/Index";
+                        window.location.href = "/Categoria/Categoria";
                     } else {
                         // Mostrar un mensaje de error al usuario
                         alert("Inicio de sesión fallido. Verifique sus credenciales.");
