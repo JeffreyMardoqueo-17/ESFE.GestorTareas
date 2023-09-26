@@ -1,5 +1,7 @@
-﻿using ESFE.GestorTareas.DAL.Repositories;
+﻿using ESFE.GestorTareas.DAL.DataContext;
+using ESFE.GestorTareas.DAL.Repositories;
 using ESFE.GestorTareas.EN;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +13,11 @@ namespace ESFE.GestorTareas.BL.Service
     public class UsuarioService : IUsuarioService
     {
         private readonly IGenericRepository<Usuario> _userRepo;
-        public UsuarioService(IGenericRepository<Usuario> userRepo)
+        private readonly GestorTareasBdContext _context;
+        public UsuarioService(IGenericRepository<Usuario> userRepo,GestorTareasBdContext context)
         {
             _userRepo = userRepo;
+            _context = context;
         }
         public async Task<bool> Actualizar(Usuario modelo)
         {
@@ -23,6 +27,12 @@ namespace ESFE.GestorTareas.BL.Service
         public async Task<bool> Eliminar(int id)
         {
             return await _userRepo.Eliminar(id);
+        }
+
+        public async Task<bool> ExisteCorreo(string correo)
+        {
+            return await _context.Usuarios.AnyAsync(u => u.Correo == correo);
+
         }
 
         public async Task<bool> Insertar(Usuario modelo)

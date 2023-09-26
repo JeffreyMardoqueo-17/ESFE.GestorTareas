@@ -43,7 +43,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Prioridad}/{action=Prioridad}/{id?}");
+    pattern: "{controller=Acceso}/{action=Registro}/{id?}");
 
 
 app.Run();

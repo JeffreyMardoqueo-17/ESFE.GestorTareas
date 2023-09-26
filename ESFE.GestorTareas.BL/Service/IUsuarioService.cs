@@ -16,5 +16,7 @@ namespace ESFE.GestorTareas.BL.Service
         Task<IQueryable<Usuario>> ObtenerTodos();
 
         Task<Usuario> ObtenerPorNombre(string nombreUsuario);
+
+        Task<bool> ExisteCorreo(string correo);
     }
 }

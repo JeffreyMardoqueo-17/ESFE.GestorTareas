@@ -29,24 +29,31 @@ namespace ESFE.GestorTareas.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> Registro(VMUsuario modelo)
         {
-
             if (ModelState.IsValid)
             {
-                var usuarioRegistrado = await _usuarioService.Insertar(new Usuario
+                // Verifica si el correo electrónico ya está registrado
+                if (await _usuarioService.ExisteCorreo(modelo.Correo))
                 {
-                    Nombre = modelo.Nombre,
-                    Correo = modelo.Correo,
-                    Pass = modelo.Pass,
-                });
-
-                if (usuarioRegistrado)
-                { 
-                    return RedirectToAction("Index", "Acceso"); 
+                    ModelState.AddModelError("Correo", "El correo electrónico ya está registrado.");
                 }
                 else
                 {
-                    // Hubo un error al registrar al usuario
-                    ModelState.AddModelError(string.Empty, "Hubo un error al registrar el usuario.");
+                    var usuarioRegistrado = await _usuarioService.Insertar(new Usuario
+                    {
+                        Nombre = modelo.Nombre,
+                        Correo = modelo.Correo,
+                        Pass = modelo.Pass,
+                    });
+
+                    if (usuarioRegistrado)
+                    {
+                        return RedirectToAction("Index", "Acceso");
+                    }
+                    else
+                    {
+                        // Hubo un error al registrar al usuario
+                        ModelState.AddModelError(string.Empty, "Hubo un error al registrar el usuario.");
+                    }
                 }
             }
 

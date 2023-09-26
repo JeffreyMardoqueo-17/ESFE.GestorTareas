@@ -12,7 +12,7 @@
                 <div class="card-header bg-black text-white text-center">
                     <h2 class="card-title" style="margin-right: auto; margin-top: 20px;">Iniciar Sesión</h2>
                 </div>
-                <div class="card-body bg-pink">                 
+                <div class="card-body bg-pink">
                     <div class="text-center mb-3">
                         <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#registroModal">
                             <i class="bi bi-person-add"></i> Registrarse
@@ -48,7 +48,7 @@
 
 <!-- Modal de Registro -->
 <div class="modal fade" id="registroModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal'lg'">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header bg-primary text-white">
                 <h5 class="modal-title text-center" id="exampleModalLabel">Registrarse</h5>
@@ -59,18 +59,18 @@
                 <form id="registroForm">
                     <div class="mb-3">
                         <label for="nombreRegistro" class="form-label">Nombre de Usuario</label>
-                        <input type="text" class="form-control" id="Nombre" name="nombreRegistro" required>
+                        <input type="text" class="form-control" id="nombreRegistro" name="nombreRegistro" required>
                     </div>
                     <div class="mb-3">
                         <label for="correoRegistro" class="form-label">Correo Electrónico</label>
-                        <input type="email" class="form-control" id="Correo" name="correoRegistro" required>
+                        <input type="email" class="form-control" id="correoRegistro" name="correoRegistro" required>
                     </div>
                     <div class="mb-3">
                         <label for="contrasenaRegistro" class="form-label">Contraseña</label>
-                        <input type="password" class="form-control" id="Pass" name="contrasenaRegistro" required>
+                        <input type="password" class="form-control" id="contrasenaRegistro" name="contrasenaRegistro" required>
                     </div>
                     <div class="text-center mb-3">
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" class="btn btn-primary" onclick="usuarioRegistrado()">
                             <i class="bi bi-person-plus mx-2"></i> Registrarse
                         </button>
                     </div>
@@ -80,16 +80,15 @@
     </div>
 </div>
 
-
 @section Scripts{
     <script>
         // Función para manejar el envío del formulario de inicio de sesión
         document.getElementById("loginForm").addEventListener("submit", function (event) {
             event.preventDefault(); // Evita que el formulario se envíe de forma predeterminada
 
-            const nombre = document.getElementById("Nombre").value;
-            const correo = document.getElementById("Correo").value;
-            const pass = document.getElementById("Pass").value;
+            const nombre = document.getElementById("nombreUsuario").value;
+            const correo = document.getElementById("correo").value;
+            const pass = document.getElementById("contrasena").value;
 
             // Aquí puedes realizar la solicitud HTTP POST al servidor para iniciar sesión
             fetch("/Acceso/Registro", {
@@ -106,7 +105,7 @@
                 .then(response => {
                     if (response.ok) {
                         // Inicio de sesión exitoso, redirigir al usuario a la página de inicio
-                        window.location.href = "/Index/Acceso";
+                        window.location.href = "/Categoria/Categoria";
                     } else {
                         // Mostrar un mensaje de error al usuario
                         alert("Inicio de sesión fallido. Verifique sus credenciales.");
@@ -115,8 +114,35 @@
                 .catch(error => {
                     console.error("Error al iniciar sesión:", error);
                 });
-                
         });
+
+        // Función para manejar el registro de usuario
+        function usuarioRegistrado() {
+            // Obtener los valores del formulario
+            var nombre = document.getElementById("nombreRegistro").value;
+            var correo = document.getElementById("correoRegistro").value;
+            var contrasena = document.getElementById("contrasenaRegistro").value;
+
+            // Validar los datos (puedes agregar más validaciones aquí)
+
+            // Crear un objeto de usuario
+            var Usuario = {
+                Nombre: nombre,
+                Correo: correo,
+                Pass: contrasena
+            };
+
+            // Enviar los datos al servidor (simulado en este ejemplo)
+            alert("Registrando usuario:", Usuario);
+
+            // Puedes hacer una solicitud AJAX al servidor para enviar los datos
+
+            // Limpiar el formulario después del registro
+            document.getElementById("nombreRegistro").value = "";
+            document.getElementById("correoRegistro").value = "";
+            document.getElementById("contrasenaRegistro").value = "";
+
+            alert("Usuario Registrado")
+        }
     </script>
 }
-
