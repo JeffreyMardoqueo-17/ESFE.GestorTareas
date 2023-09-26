@@ -17,6 +17,7 @@ namespace ESFE.GestorTareas.DAL.Repositories
         {
             _dbcontext = context;
         }
+        //marca la entidad 'modelo' como modificada en el contexto de la base de datos.
         public async Task<bool> Actualizar(AsignacionTarea modelo)
         {
             _dbcontext.AsignacionTareas.Update(modelo);

@@ -9,10 +9,13 @@ namespace ESFE.GestorTareas.UI.Controllers
 {
     public class TareaController : Controller
     {
+        //Constructor de la clase TareaaControler
+        //Recibe un parametro que se utiliza para inyectar dependencia de esa clase (TareaController)
         private readonly ITareaService _TareaService;
 
         public TareaController(ITareaService TareaService)
         {
+            //asignnoo
             _TareaService = TareaService;
         }
         //vista
@@ -20,15 +23,16 @@ namespace ESFE.GestorTareas.UI.Controllers
         {
             return View();
         }
-
-        [HttpGet]
+        //Lista
+        [HttpGet] //para recuperar o recibir informacion del server
         public async Task<IActionResult> Lista()
         {
-
+            //obtengo todo
             IQueryable<Tarea> queryCategoriumSQL = await _TareaService.ObtenerTodos();
-
+            //listaaaaaaaaaaaaaaa
             List<VMTarea> lista = queryCategoriumSQL
                                       .Select(j => new VMTarea()
+                                      //hijo de VMTarea
                                       {
                                           Id = (byte)j.Id,
                                           Nombre = j.Nombre,
@@ -42,13 +46,13 @@ namespace ESFE.GestorTareas.UI.Controllers
                                           IdEstadoTareaNavigation = j.IdEstadoTareaNavigation,
                                           IdPrioridadNavigation = j.IdPrioridadNavigation
                                       }).ToList();
-            return StatusCode(StatusCodes.Status200OK, lista);
+            return StatusCode(StatusCodes.Status200OK, lista); //exitosa, obtengo la lista
         }
 
-        [HttpPost]
+        [HttpPost] //enviar datos al servidor 
         public async Task<IActionResult> Insertar([FromBody] VMTarea m)
         {
-
+            //Hijo de Tarea
             Tarea NuevoModelo = new Tarea()
             {
                 Nombre = m.Nombre,
@@ -62,12 +66,13 @@ namespace ESFE.GestorTareas.UI.Controllers
                 IdEstadoTareaNavigation = m.IdEstadoTareaNavigation,
                 IdPrioridadNavigation = m.IdPrioridadNavigation
             };
+            //paso el nuevo Modal
             bool respuesta = await _TareaService.Insertar(NuevoModelo);
 
-            return StatusCode(StatusCodes.Status200OK, new { valor = respuesta });
+            return StatusCode(StatusCodes.Status200OK, new { valor = respuesta }); //Exito 
         }
 
-        [HttpPut]
+        [HttpPut] //para manejar solicitudes: Las solicitudes PUT se utilizan para actualizar algo en el servidor
         public async Task<IActionResult> Actualizar([FromBody] VMTarea m)
         {
 
@@ -84,9 +89,9 @@ namespace ESFE.GestorTareas.UI.Controllers
                 IdEstadoTareaNavigation = m.IdEstadoTareaNavigation,
                 IdPrioridadNavigation = m.IdPrioridadNavigation
             };
-            bool respuesta = await _TareaService.Actualizar(NuevoModelo);
+            bool respuesta = await _TareaService.Actualizar(NuevoModelo); //paso el modelo
 
-            return StatusCode(StatusCodes.Status200OK, new { valor = respuesta });
+            return StatusCode(StatusCodes.Status200OK, new { valor = respuesta }); //Exito
         }
 
         [HttpDelete]

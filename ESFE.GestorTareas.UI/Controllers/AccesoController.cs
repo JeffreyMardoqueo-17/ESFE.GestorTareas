@@ -8,10 +8,12 @@ namespace ESFE.GestorTareas.UI.Controllers
 {
     public class AccesoController : Controller
     {
+        //Instancia de servicio
         private readonly IUsuarioService _usuarioService;
 
         public AccesoController(IUsuarioService usuarioService)
         {
+            //a Uservice le asigno la variable UsuarioServce
             _usuarioService = usuarioService;
         }
 
@@ -21,22 +23,26 @@ namespace ESFE.GestorTareas.UI.Controllers
         }
 
         [HttpGet]
+        //vista registro
         public IActionResult Registro()
         {
             return View();
         }
 
+        //Registro de Usuario
         [HttpPost]
-        public async Task<IActionResult> Registro(VMUsuario modelo)
+        public async Task<IActionResult> Registro(VMUsuario m)
         {
 
             if (ModelState.IsValid)
             {
+                //Instancia de Usuario
                 var usuarioRegistrado = await _usuarioService.Insertar(new Usuario
                 {
-                    Nombre = modelo.Nombre,
-                    Correo = modelo.Correo,
-                    Pass = modelo.Pass,
+                    //Prioridades de Usuario
+                    Nombre = m.Nombre,
+                    Correo = m.Correo,
+                    Pass = m.Pass,
                 });
 
                 if (usuarioRegistrado)
@@ -51,7 +57,7 @@ namespace ESFE.GestorTareas.UI.Controllers
             }
 
             // Si el modelo no es válido o hubo un error, muestra la vista de registro nuevamente
-            return View(modelo);
+            return View(m);
         }
     }
 }
