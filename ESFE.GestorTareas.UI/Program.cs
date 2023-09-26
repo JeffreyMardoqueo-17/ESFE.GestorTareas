@@ -16,6 +16,14 @@ builder.Services.AddScoped<IGenericRepository<Categorium>, CategoriumRepository>
 builder.Services.AddScoped<ICategoriaService, CategoriaService>();
 builder.Services.AddScoped<IGenericRepository<Usuario>, UsuarioRepository>();
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
+builder.Services.AddScoped<IGenericRepository<Empleado>, EmpleadoRepository>();
+builder.Services.AddScoped<IEmpleadoService, EmpleadoService>();
+builder.Services.AddScoped<IGenericRepository<Prioridad>, PrioridadRepository>();
+builder.Services.AddScoped<IPrioridadService, PrioridadService>();
+builder.Services.AddScoped<IGenericRepository<EstadoTarea>, EstadoTareaRepository>();
+builder.Services.AddScoped<IEstadoTareaService, EstadoTareaService>();
+builder.Services.AddScoped<IGenericRepository<Cargo>, CargoRepository>();
+builder.Services.AddScoped<ICargoService, CargoService>();
 
 
 var app = builder.Build();
@@ -33,6 +41,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Acceso}/{action=Registro}/{id?}");
+    pattern: "{controller=Prioridad}/{action=Prioridad}/{id?}");
 
 app.Run();

@@ -1,6 +1,5 @@
-﻿
-@{
-    ViewData["Title"] = "Categoria Page";
+﻿@{
+    ViewData["Title"] = "Cargo Page";
 }
 
 @{
@@ -9,22 +8,23 @@
 
 
 
-<div class="container mx-4">
+<div class="container mx-">
     <div class="row justify-content-center">
         <div class=" col-12 d-flex">
             <div class="card shadow">
                 <div class="card-header bg-black text-white text-center">
-                    <h2 class="card-title" style="margin-right: 85px; margin-top: 20px;">Lista de categorias</h2>
+                    <h2 class="card-title" style="margin-right: 85px; margin-top: 20px;">Lista de Cargo</h2>
                 </div>
                 <div class="card-body bg-pink">
                     <div class="text-center mb-3">
-                        <button class="btn btn-success" id="btnNuevo"> <i class="bi bi-folder-plus mx-2"></i> Añadir categoria</button>
+                        <button class="btn btn-success" id="btnNuevo"> <i class="bi bi-person-workspace"></i> Añadir Cargo</button>
                     </div>
-                    <table class="table table-bordered table-striped" id="tbCategoria">
+                    <table class="table table-bordered table-striped" id="tbCargo">
                         <thead>
                             <tr>
-                                <th>Nombre</th>
+                                <th>Cargo</th>
                                 <th></th>
+
                             </tr>
                         </thead>
                         <tbody>
@@ -40,13 +40,13 @@
     <div class="modal-dialog modal'lg'">
         <div class="modal-content">
             <div class="modal-header bg-primary text-white ">
-                <h5 class="modal-title">Detalle categorias</h5>
+                <h5 class="modal-title">Detalle de Cargo</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <input type="hidden" id="txtId" value="0" />
                 <div class="mb-3">
-                    <label for="txtNombre" class="form-label">Nombre</label>
+                    <label for="txtNombre" class="form-label">Cargo</label>
                     <input type="text" class="form-control" id="txtNombre" />
                 </div>
             </div>
@@ -69,7 +69,7 @@
 
         $(document).ready(() => {
 
-            listaCategorias();
+            listaCargos();
         })
 
         function mostrarModal(modelo) {
@@ -96,13 +96,13 @@
             const nombre = NuevoModelo["nombre"].trim();
 
             if (nombre === "") {
-                alert("El campo del categoria no puede estar vacío.");
+                alert("El campo de cargo no puede estar vacío.");
                 return
             }
 
             //COMPRUEBA SI EL CAMPO ID TIENE EL VALOR "0"
             if ($("#txtId").val() == "0") {
-                fetch("Categoria/Insertar", {
+                fetch("Cargo/Insertar", {
                     method: "POST",
                     headers: {
                         'Content-Type': 'application/json;charset=utf-8'
@@ -115,15 +115,15 @@
                     .then((dataJson) => {
 
                         if (dataJson.valor) {
-                            alert("categoria Registrada.");
+                            alert("Cargo registrado.");
                             $('.modal').modal('hide');
-                            listaCategorias();
+                            listaCargos();
                         }
                     })
             }
             //SI EL CAMPO ID NO TIENE EL VALOR DE "0" SIGNIFICA QUE SE ESTÁ EDITANDO UNA CATEGORIA EXISTENTE
             else {
-                fetch("Categoria/Actualizar", {
+                fetch("Cargo/Actualizar", {
                     method: "PUT",
                     headers: {
                         'Content-Type': 'application/json;charset=utf-8'
@@ -137,9 +137,9 @@
                     .then((dataJson) => {
 
                         if (dataJson.valor) {
-                            alert("categoria Editada.");
+                            alert("Cargo Editado.");
                             $('.modal').modal('hide');
-                            listaCategorias();
+                            listaCargos();
                         }
                     })
             }
@@ -148,19 +148,19 @@
 
         //FUNCIÓN PARA OBTENER DATOS
 
-        function listaCategorias() {
+        function listaCargos() {
 
-            fetch("Categoria/Lista")
+            fetch("Cargo/Lista")
                 .then((response) => {
                     return response.ok ? response.json() : Promise.reject(response)
                 })
                 .then((dataJson) => {
 
-                    $("#tbCategoria tbody").html("");
+                    $("#tbCargo tbody").html("");
 
                     dataJson.forEach((item) => {
 
-                        $("#tbCategoria tbody").append(
+                        $("#tbCargo tbody").append(
                             $("<tr>").append(
                                 $("<td>").text(item.nombre),
                                 $("<td>").append(
@@ -176,22 +176,22 @@
 
         //FUNCION PARA EDITAR LOS DATOS
 
-        $("#tbCategoria tbody").on("click", ".btn-editar", function () {
-            let categoria = $(this).data("modelo")
+        $("#tbCargo tbody").on("click", ".btn-editar", function () {
+            let Cargo = $(this).data("modelo")
 
-            mostrarModal(categoria)
+            mostrarModal(Cargo)
         })
 
         //FUNCION PARA ELIMINAR LOS DATOS
 
-        $("#tbCategoria tbody").on("click", ".btn-eliminar", function () {
+        $("#tbEstado tbody").on("click", ".btn-eliminar", function () {
             let id = $(this).data("id")
 
-            let resultado = window.confirm("¿Desea eliminar la categoria?");
+            let resultado = window.confirm("¿Desea eliminar el cargo?");
 
             if (resultado) {
 
-                fetch("Categoria/Eliminar?id=" + id, {
+                fetch("Cargo/Eliminar?id=" + id, {
                     method: "DELETE"
                 })
                     .then((response) => {
@@ -200,7 +200,7 @@
                     .then((dataJson) => {
 
                         if (dataJson.valor) {
-                            listaCategorias();
+                            listaCargos();
                         }
                     })
             }
@@ -208,3 +208,7 @@
 
     </script>
  }
+
+
+
+

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ESFE.GestorTareas.DAL.Repositories
 {
-    internal class PrioridadRepository : IGenericRepository<Prioridad>
+    public class PrioridadRepository : IGenericRepository<Prioridad>
     {
         private readonly GestorTareasBdContext _dbcontext;
 

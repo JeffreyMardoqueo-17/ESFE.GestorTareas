@@ -14,14 +14,23 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    background-color: #e3e3ce;
+}
+
+.bg-black {
+    background-color: #000000;
+}
+
+.bg-pink {
+    background-color: #e9d0c3;
 }
 
 
-/* Estilos para reducir el tamaño del contenedor de categorías */
+/* Estilos para reducir el tamaño del contenedor de Estados
 #tbCategoria {
-    max-width: 400px; /* Define el ancho máximo del contenedor */
-    max-height: 200px; /* Define la altura máxima del contenedor */
+    max-width: 500px; /* Define el ancho máximo del contenedor */
+    max-height: 300px; /* Define la altura máxima del contenedor */
     overflow: auto; /* Agrega una barra de desplazamiento si el contenido es más grande que el contenedor */
 }
 

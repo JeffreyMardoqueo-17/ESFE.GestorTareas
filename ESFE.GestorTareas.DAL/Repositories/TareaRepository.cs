@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ESFE.GestorTareas.DAL.Repositories
 {
-    internal class TareaRepository : IGenericRepository<Tarea>
+    public class TareaRepository : IGenericRepository<Tarea>
     {
         private readonly GestorTareasBdContext _dbcontext;
 

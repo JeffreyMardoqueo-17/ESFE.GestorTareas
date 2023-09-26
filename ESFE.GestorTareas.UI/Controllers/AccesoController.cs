@@ -40,8 +40,7 @@ namespace ESFE.GestorTareas.UI.Controllers
                 });
 
                 if (usuarioRegistrado)
-                {
- 
+                { 
                     return RedirectToAction("Index", "Acceso"); 
                 }
                 else
