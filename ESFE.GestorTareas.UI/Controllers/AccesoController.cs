@@ -4,71 +4,63 @@ using ESFE.GestorTareas.UI.Models.ViewModels;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace ESFE.GestorTareas.UI.Controllers
 {
     public class AccesoController : Controller
     {
+        //Instancia de servicio
         private readonly IUsuarioService _usuarioService;
 
         public AccesoController(IUsuarioService usuarioService)
         {
+            //a Uservice le asigno la variable UsuarioServce
             _usuarioService = usuarioService;
         }
 
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        //vista registro
         public IActionResult Registro()
         {
             return View();
         }
 
+        //Registro de Usuario
         [HttpPost]
-        public async Task<IActionResult> Registro(VMUsuario modelo)
-        {
-            Usuario UsuarioRegistrado = await _usuarioService.Insertar(modelo);
-
-            if (UsuarioRegistrado.Id > 0)
-                return RedirectToAction("IniciarSesion", "Inicio");
-
-            ViewData["Mensaje"] = "No se pudo crear el usuario";
-            return View();
-        }
-
-        public IActionResult IniciarSesion()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> IniciarSesion(string correo, string clave)
+        public async Task<IActionResult> Registro(VMUsuario m)
         {
 
-            Usuario usuario_encontrado = await _usuarioService.GetUsuario(correo, Utilidades.EncriptarClave(clave));
-
-            if (usuario_encontrado == null)
+            if (ModelState.IsValid)
             {
-                ViewData["Mensaje"] = "No se encontraron coincidencias";
-                return View();
-            }
+                //Instancia de Usuario
+                    var usuarioRegistrado = await _usuarioService.Insertar(new Usuario
+                    {
+                    //Prioridades de Usuario
+                    Nombre = m.Nombre,
+                    Correo = m.Correo,
+                    Pass = m.Pass,
+                    });
 
-            List<Claim> claims = new List<Claim>() {
-                new Claim(ClaimTypes.Name, usuario_encontrado.NombreUsuario)
-            };
+                    if (usuarioRegistrado)
+                    {
+                        return RedirectToAction("Index", "Acceso");
+                    }
+                    else
+                    {
+                        // Hubo un error al registrar al usuario
+                        ModelState.AddModelError(string.Empty, "Hubo un error al registrar el usuario.");
+                    }
+                }
 
-            ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-            AuthenticationProperties properties = new AuthenticationProperties()
-            {
-                AllowRefresh = true
-            };
-
-            await HttpContext.SignInAsync(
-                CookieAuthenticationDefaults.AuthenticationScheme,
-                new ClaimsPrincipal(claimsIdentity),
-                properties
-                );
-
-            return RedirectToAction("Index", "Home");
+            // Si el modelo no es válido o hubo un error, muestra la vista de registro nuevamente
+            return View(m);
         }
     }
 }
+

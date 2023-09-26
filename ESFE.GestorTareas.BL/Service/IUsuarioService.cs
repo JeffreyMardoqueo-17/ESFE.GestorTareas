@@ -18,5 +18,9 @@ namespace ESFE.GestorTareas.BL.Service
         Task<Usuario> ObtenerPorNombre(string nombreUsuario);
 
         Task<bool> ExisteCorreo(string correo);
+
+        //Esto agregueeeEEEEE
+        Task<Usuario> GetUsuario(string nombre, string correo, string pass);
+        Task<Usuario> SaveUsuario(Usuario modelo);
     }
 }

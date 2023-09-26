@@ -13,11 +13,12 @@ namespace ESFE.GestorTareas.BL.Service
     public class UsuarioService : IUsuarioService
     {
         private readonly IGenericRepository<Usuario> _userRepo;
-        private readonly GestorTareasBdContext _context;
-        public UsuarioService(IGenericRepository<Usuario> userRepo,GestorTareasBdContext context)
+        private readonly GestorTareasBdContext _dbcontext;
+
+        public UsuarioService(IGenericRepository<Usuario> userRepo,GestorTareasBdContext dbcontext)
         {
             _userRepo = userRepo;
-            _context = context;
+            _dbcontext = dbcontext;
         }
         public async Task<bool> Actualizar(Usuario modelo)
         {
@@ -31,7 +32,16 @@ namespace ESFE.GestorTareas.BL.Service
 
         public async Task<bool> ExisteCorreo(string correo)
         {
-            return await _context.Usuarios.AnyAsync(u => u.Correo == correo);
+            return await _dbcontext.Usuarios.AnyAsync(u => u.Correo == correo);
+
+        }
+
+        public async Task<Usuario> GetUsuario(string nombre, string correo, string pass)
+        {
+            Usuario usuarioEncontrado = await _dbcontext.Usuarios.Where(u => u.Nombre == nombre && u.Correo == correo && u.Pass == pass)
+                .FirstOrDefaultAsync();
+
+            return usuarioEncontrado;
 
         }
 
@@ -55,6 +65,14 @@ namespace ESFE.GestorTareas.BL.Service
         public async Task<IQueryable<Usuario>> ObtenerTodos()
         {
             return await _userRepo.ObtenerTodos();
+        }
+
+        public async Task<Usuario> SaveUsuario(Usuario modelo)
+        {
+            _dbcontext.Usuarios.Add(modelo);
+            await _dbcontext.SaveChangesAsync();
+
+            return modelo;
         }
     }
 }
