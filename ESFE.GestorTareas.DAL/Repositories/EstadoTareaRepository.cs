@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ESFE.GestorTareas.DAL.Repositories
 {
-    internal class EstadoTareaRepository : IGenericRepository<EstadoTarea>
+    public class EstadoTareaRepository : IGenericRepository<EstadoTarea>
     {
         private readonly GestorTareasBdContext _dbcontext;
 

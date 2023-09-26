@@ -9,18 +9,17 @@
     <div class="row justify-content-center">
         <div class="col-md-4">
             <div class="card shadow">
-                <div class="card-header bg-success text-white text-center">
+                <div class="card-header bg-black text-white text-center">
                     <h2 class="card-title" style="margin-right: auto; margin-top: 20px;">Iniciar Sesión</h2>
                 </div>
-                <div class="card-body">                 
-                    <!-- Botón para abrir el modal de registro -->
+                <div class="card-body bg-pink">                 
                     <div class="text-center mb-3">
                         <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#registroModal">
-                            <i class="bi bi-person-plus mx-2"></i> Registrarse
+                            <i class="bi bi-person-add"></i> Registrarse
                         </button>
                     </div>
                     <hr>
-                    <!-- Etse formulario de inicio de sesion obvioo -->
+
                     <form id="loginForm">
                         <div class="mb-3">
                             <label for="nombreUsuario" class="form-label">Nombre de Usuario</label>
@@ -60,15 +59,15 @@
                 <form id="registroForm">
                     <div class="mb-3">
                         <label for="nombreRegistro" class="form-label">Nombre de Usuario</label>
-                        <input type="text" class="form-control" id="nombreRegistro" name="nombreRegistro" required>
+                        <input type="text" class="form-control" id="Nombre" name="nombreRegistro" required>
                     </div>
                     <div class="mb-3">
                         <label for="correoRegistro" class="form-label">Correo Electrónico</label>
-                        <input type="email" class="form-control" id="correoRegistro" name="correoRegistro" required>
+                        <input type="email" class="form-control" id="Correo" name="correoRegistro" required>
                     </div>
                     <div class="mb-3">
                         <label for="contrasenaRegistro" class="form-label">Contraseña</label>
-                        <input type="password" class="form-control" id="contrasenaRegistro" name="contrasenaRegistro" required>
+                        <input type="password" class="form-control" id="Pass" name="contrasenaRegistro" required>
                     </div>
                     <div class="text-center mb-3">
                         <button type="submit" class="btn btn-primary">
@@ -88,9 +87,9 @@
         document.getElementById("loginForm").addEventListener("submit", function (event) {
             event.preventDefault(); // Evita que el formulario se envíe de forma predeterminada
 
-            const nombreUsuario = document.getElementById("nombreUsuario").value;
-            const correo = document.getElementById("correo").value;
-            const contrasena = document.getElementById("contrasena").value;
+            const nombre = document.getElementById("Nombre").value;
+            const correo = document.getElementById("Correo").value;
+            const pass = document.getElementById("Pass").value;
 
             // Aquí puedes realizar la solicitud HTTP POST al servidor para iniciar sesión
             fetch("/Acceso/Registro", {
@@ -99,9 +98,9 @@
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    Nombre: nombreUsuario,
+                    Nombre: nombre,
                     Correo: correo,
-                    Pass: contrasena
+                    Pass: pass
                 })
             })
                 .then(response => {
